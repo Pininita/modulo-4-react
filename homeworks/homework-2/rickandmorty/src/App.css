@@ -4,12 +4,14 @@ div {
 
 }
 
-.billie-image {
-  max-width: 50%;
-  height: auto;
-}
-
 p{
   font-size: 20px;
 }
 
+.title {
+  color: greenyellow;
+}
+
+.subtitle {
+  color: goldenrod;
+}
