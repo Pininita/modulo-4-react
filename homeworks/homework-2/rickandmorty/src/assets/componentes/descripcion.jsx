@@ -1,16 +1,16 @@
 import React from 'react';
 
 function Details(props) {
-  return (
+  return(
     <div>
-      <p>
-        <b>Gender:</b> {props.genre}
-      </p>
-      <p>
-        <b>State:</b> {props.status}
-      </p>
+        <p>
+            <strong>Genre: </strong>{props.genre}
+        </p>
+        <p>
+            <strong>Status: </strong>{props.status}
+        </p>
     </div>
-  );
+)
 }
 
 export default Details;

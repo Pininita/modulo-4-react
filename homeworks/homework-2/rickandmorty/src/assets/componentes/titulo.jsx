@@ -2,12 +2,11 @@ import React from 'react';
 
 
 function Title(props) {
-  return (
+  return(
     <div>
-      <h1 className='title'>{props.title}</h1>
-      <h2 className='subtitle'>{props.subtitle}</h2>
+        <h3>{props.name}</h3>
     </div>
-  )
+    )
 }
 
 export default Title;
