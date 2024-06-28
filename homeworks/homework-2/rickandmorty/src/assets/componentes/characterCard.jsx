@@ -9,7 +9,7 @@ function CharacterCard(props) {
       <Title name={props.name}/>
       <Image url={props.image} />
       <Details 
-        genre={props.genre} 
+        gender={props.gender} 
         status={props.status} 
       />
     </div>

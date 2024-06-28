@@ -4,7 +4,7 @@ function Details(props) {
   return(
     <div>
         <p>
-            <strong>Genre: </strong>{props.genre}
+            <strong>gender: </strong>{props.gender}
         </p>
         <p>
             <strong>Status: </strong>{props.status}
