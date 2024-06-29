@@ -15,3 +15,20 @@ p{
 .subtitle {
   color: goldenrod;
 }
+
+.content{
+  display: flex;
+  flex-direction: column;
+}
+
+.characters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.characterCard {
+  width: 20%;
+}
+
+

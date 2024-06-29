@@ -7,68 +7,65 @@ import './App.css';
 function App() {
   // Paso 1. 
   const [charactersList, setCharactersList] = useState([]);
+  const [offSet, setOffset] = useState(1)
 
   // Paso 2
-  useEffect( () => {
-        fetch("https://rickandmortyapi.com/api/character/?page=1")
-        .then((response) => response.json())
-        .then((data) => {
-           
-            console.log(data); 
+  useEffect(() => {
+    fetch(`https://rickandmortyapi.com/api/character/?page=${offSet}`)
+      .then((response) => response.json())
+      .then((data) => {
 
-            setCharactersList(data.results);
-        });
-    }, [])  
+        console.log(data);
+
+        setCharactersList(data.results);
+      });
+  }, [offSet])
+
+  const changeNextPage = () => {
+    setOffset(offSet + 1)
+  }
+
+  const changePrevPage = () => {
+    setOffset(offSet - 1)
+  }
+
 
 
   return (
     <div>
-      <h1>Personajes de Rick and morty</h1>
-      {/* 
-        Paso 3. Uuando la variable creada en el paso 1, debes usar map para leer todos 
-        personajes e ir agreando al doom el detalle de cáda uno usando el componenete 
-        CharacterCard.jsx creado en la clase pasada. 
-      */}
-      <div>
-        {
-          charactersList.map( (character) => (
-            
-            <CharacterCard 
-            key = {character.id}
-              name={character.name}
-              image={character.image}
-              gender={character.gender}
-              status={character.status}
-            />
-          ))
-        }
+      <div className='content'>
+        <div>
+          <h1 className='title'>Personajes de Rick and morty</h1>
+        </div>
+        <div className='characters'>
+          <div className='characterCard'>
+            {
+              charactersList.map((character) => (
+
+                <CharacterCard
+                  key={character.id}
+                  name={character.name}
+                  image={character.image}
+                  gender={character.gender}
+                  status={character.status}
+                />
+              ))
+            }
+          </div>
+        </div>
+
+        <div className='paginacion'>
+          <button disabled={offSet === 1} onClick={changePrevPage}>prev page</button>
+          <p>{offSet}</p>
+          <button disabled={offSet === 42} onClick={changeNextPage}>next page</button>
+        </div>
       </div>
-      
-      {/*
-        OPCIONAL: Inclute un componenet de paginación y haz que la variable de el paso 1 
-        se actualice dinamicamente con la información de cáda página
-      */}
     </div>
   );
 }
 
 
-  // function App() {
-  //   return (
-  //     <div>
-  //       <h1>Personajes de Rick and morty</h1>
-  //       {/* 
-  //         Ahora con esta lógica puedes renderizar vla información de varios personajes
-  //       */}
-  //       <RickAndMortyCharacterCard id={1}/>
-  //       <RickAndMortyCharacterCard id={2}/>
-  //       <RickAndMortyCharacterCard id={3}/>
-  //       <RickAndMortyCharacterCard id={10}/>
-  //     </div>
-  //   );
-  // }
-  
-  export default App;
-  
+export default App;
+
 
 
