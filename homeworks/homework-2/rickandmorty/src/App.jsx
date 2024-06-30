@@ -22,12 +22,20 @@ function App() {
   }, [offSet])
 
   const changeNextPage = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
     setOffset(offSet + 1)
   }
 
   const changePrevPage = () => {
+    window.scrollTo({
+      top:0
+    })
     setOffset(offSet - 1)
   }
+
 
 
 
@@ -41,14 +49,16 @@ function App() {
           <div className='characterCard'>
             {
               charactersList.map((character) => (
-
-                <CharacterCard
+                <div className='item'>
+                  <CharacterCard
                   key={character.id}
                   name={character.name}
                   image={character.image}
                   gender={character.gender}
                   status={character.status}
                 />
+                </div>
+                
               ))
             }
           </div>
