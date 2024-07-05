@@ -1,0 +1,78 @@
+import React, { useState, useEffect } from 'react';
+import CharacterCard from './characterCard'
+// import '../../App.css';
+
+
+
+function CharacterPage(props) {
+  // Paso 1. 
+  const [charactersList, setCharactersList] = useState([]);
+  const [offSet, setOffset] = useState(1)
+
+  // Paso 2
+  useEffect(() => {
+    fetch(`https://rickandmortyapi.com/api/character/?page=${offSet}`)
+      .then((response) => response.json())
+      .then((data) => {
+
+        console.log(data);
+
+        setCharactersList(data.results);
+      });
+  }, [offSet])
+
+  const changeNextPage = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+    setOffset(offSet + 1)
+  }
+
+  const changePrevPage = () => {
+    window.scrollTo({
+      top:0
+    })
+    setOffset(offSet - 1)
+  }
+
+
+
+
+  return (
+    <div>
+      <div className='content'>
+        <div>
+          <h1 className='title'>CHARACTERS R&M</h1>
+        </div>
+        <div className='characters'>
+          <div className='characterCard'>
+            {
+              charactersList.map((character) => (
+                <div className='item'>
+                  <CharacterCard
+                  key={character.id}
+                  name={character.name}
+                  image={character.image}
+                  gender={character.gender}
+                  status={character.status}
+                />
+                </div>
+                
+              ))
+            }
+          </div>
+        </div>
+
+        <div className='paginacion'>
+          <button disabled={offSet === 1} onClick={changePrevPage}>prev page</button>
+          <p>{offSet}</p>
+          <button disabled={offSet === 42} onClick={changeNextPage}>next page</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+export default CharacterPage;

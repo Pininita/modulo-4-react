@@ -101,3 +101,25 @@ button:active {
   background-color: purple;
   border: 2px solid #1a1a1a;
 }
+
+/* nadvbar start */
+
+.nav-links{
+  border: 1px solid blue;
+  background-color: #1a1a1a;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  justify-content: space-around;
+  font-size: 23px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.nav-links-text {
+  color: rgb(161, 59, 59);
+  font-weight: bold;
+}

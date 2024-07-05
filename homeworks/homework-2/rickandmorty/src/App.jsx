@@ -1,81 +1,37 @@
-import React, { useState, useEffect } from 'react';// import RickAndMortyCharacterCard from './assets/componentes/RickAndMortyCharacterCard';
-import CharacterCard from './assets/componentes/characterCard'
+import React from 'react';
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import HomePage from './assets/componentes/homePage';
+import CharacterPage from './assets/componentes/characterPage';
+import EpisodesPage from './assets/componentes/episodesPage';
+import NotFoundPage from './assets/componentes/notFound';
 import './App.css';
 
-
-
 function App() {
-  // Paso 1. 
-  const [charactersList, setCharactersList] = useState([]);
-  const [offSet, setOffset] = useState(1)
-
-  // Paso 2
-  useEffect(() => {
-    fetch(`https://rickandmortyapi.com/api/character/?page=${offSet}`)
-      .then((response) => response.json())
-      .then((data) => {
-
-        console.log(data);
-
-        setCharactersList(data.results);
-      });
-  }, [offSet])
-
-  const changeNextPage = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    })
-    setOffset(offSet + 1)
-  }
-
-  const changePrevPage = () => {
-    window.scrollTo({
-      top:0
-    })
-    setOffset(offSet - 1)
-  }
-
-
-
-
   return (
-    <div>
-      <div className='content'>
-        <div>
-          <h1 className='title'>Personajes de Rick and morty</h1>
-        </div>
-        <div className='characters'>
-          <div className='characterCard'>
-            {
-              charactersList.map((character) => (
-                <div className='item'>
-                  <CharacterCard
-                  key={character.id}
-                  name={character.name}
-                  image={character.image}
-                  gender={character.gender}
-                  status={character.status}
-                />
-                </div>
-                
-              ))
-            }
-          </div>
-        </div>
-
-        <div className='paginacion'>
-          <button disabled={offSet === 1} onClick={changePrevPage}>prev page</button>
-          <p>{offSet}</p>
-          <button disabled={offSet === 42} onClick={changeNextPage}>next page</button>
-        </div>
+    <BrowserRouter>
+      <div className="app-container">
+        <nav>
+          <ul className="nav-links">
+            <li>
+              <Link to='/'><span className='nav-links-text'>Home</span></Link>
+            </li>
+            <li>
+              <Link to='/characters'><span className='nav-links-text'>Characters</span></Link>
+            </li>
+            <li>
+              <Link to='/episodes'><span className='nav-links-text'>Episodes</span></Link>
+            </li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/characters" element={<CharacterPage />} />
+          <Route path="/episodes" element={<EpisodesPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
-
 export default App;
-
-
-
