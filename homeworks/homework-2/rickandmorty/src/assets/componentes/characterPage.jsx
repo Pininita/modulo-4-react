@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CharacterCard from './characterCard'
+import { useLocation, useParams } from 'react-router-dom';
+
 // import '../../App.css';
 
 
@@ -8,18 +10,27 @@ function CharacterPage(props) {
   // Paso 1. 
   const [charactersList, setCharactersList] = useState([]);
   const [offSet, setOffset] = useState(1)
-
+  // const urlData = useLocation()
+  // const  { characterName }  = useParams();
+  const  urlData  = useLocation();
+  const querryParamas = new URLSearchParams(urlData.search)
+  const nameCharacter = querryParamas.get('name')
+console.log(nameCharacter);
+console.log(charactersList);
   // Paso 2
   useEffect(() => {
-    fetch(`https://rickandmortyapi.com/api/character/?page=${offSet}`)
+    if (nameCharacter) {
+      fetch(`https://rickandmortyapi.com/api/character/?page=${offSet}&name=${nameCharacter}`)
       .then((response) => response.json())
       .then((data) => {
 
-        console.log(data);
 
         setCharactersList(data.results);
+        // filterDataByCharacterName(data.results) 
       });
-  }, [offSet])
+    }
+    
+  }, [offSet, nameCharacter])
 
   const changeNextPage = () => {
     window.scrollTo({
@@ -36,8 +47,10 @@ function CharacterPage(props) {
     setOffset(offSet - 1)
   }
 
-
-
+const filterDataByCharacterName = (data) => {
+ const filtrados = characterName ? data.filter((character)  => character.name.includes(characterName)) : data
+ setCharactersList(filtrados)
+}
 
   return (
     <div>
@@ -45,10 +58,16 @@ function CharacterPage(props) {
         <div>
           <h1 className='title'>CHARACTERS R&M</h1>
         </div>
+        <div>
+          {/* <input type="text" placeholder='search...'/>
+          <button>search</button> */}
+        </div>
         <div className='characters'>
           <div className='characterCard'>
             {
-              charactersList.map((character) => (
+              charactersList.map((character) => {
+                console.log(character);
+                return(
                 <div className='item'>
                   <CharacterCard
                   key={character.id}
@@ -59,7 +78,7 @@ function CharacterPage(props) {
                 />
                 </div>
                 
-              ))
+              )})
             }
           </div>
         </div>

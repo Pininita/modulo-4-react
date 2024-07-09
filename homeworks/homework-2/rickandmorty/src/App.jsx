@@ -5,13 +5,14 @@ import CharacterPage from './assets/componentes/characterPage';
 import EpisodesPage from './assets/componentes/episodesPage';
 import NotFoundPage from './assets/componentes/notFound';
 import './App.css';
+import BarraDeBusqueda from './assets/componentes/barraDeBusqueda';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="app-container">
         <nav>
-          <ul className="nav-links">
+          {/* <ul className="nav-links">
             <li>
               <Link to='/'><span className='nav-links-text'>Home</span></Link>
             </li>
@@ -21,9 +22,14 @@ function App() {
             <li>
               <Link to='/episodes'><span className='nav-links-text'>Episodes</span></Link>
             </li>
-          </ul>
+          </ul> */}
+          <div>
+            
+            <BarraDeBusqueda/>
+          </div>
         </nav>
         <Routes>
+          <Route path="/characters/:characterName" element={<CharacterPage />} />       
           <Route path="/" element={<HomePage />} />
           <Route path="/characters" element={<CharacterPage />} />
           <Route path="/episodes" element={<EpisodesPage />} />
