@@ -31,9 +31,9 @@ function App() {
         <Routes>
           <Route path="/characters/:characterName" element={<CharacterPage />} />       
           <Route path="/" element={<HomePage />} />
-          <Route path="/characters" element={<CharacterPage />} />
-          <Route path="/episodes" element={<EpisodesPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+            <Route path="/characters" element={<CharacterPage />} />
+            <Route path="/episodes" element={<EpisodesPage />} />
+            <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -63,24 +63,24 @@ const filterDataByCharacterName = (data) => {
           <button>search</button> */}
         </div>
         <div className='characters'>
-          <div className='characterCard'>
-            {
-              charactersList.map((character) => {
-                console.log(character);
-                return(
-                <div className='item'>
-                  <CharacterCard
-                  key={character.id}
-                  name={character.name}
-                  image={character.image}
-                  gender={character.gender}
-                  status={character.status}
-                />
-                </div>
-                
-              )})
-            }
-          </div>
+            <div className='characterCard'>
+              {
+                charactersList.map((character) => {
+                  console.log(character);
+                  return(
+                  <div className='item'>
+                    <CharacterCard
+                    key={character.id}
+                    name={character.name}
+                    image={character.image}
+                    gender={character.gender}
+                    status={character.status}
+                  />
+                  </div>
+                  
+                )})
+              }
+            </div>
         </div>
 
         <div className='paginacion'>
